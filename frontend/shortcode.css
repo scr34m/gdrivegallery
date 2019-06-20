@@ -1,0 +1,12 @@
+.dgdg-gallery-container {
+    display: flex;
+    margin: 10px;
+}
+.dgdg-gallery-container .col {
+    flex: 1;
+    line-height: 0;
+    margin: 0 10px;
+}
+.dgdg-gallery-container img {
+    margin: 10px;
+}
