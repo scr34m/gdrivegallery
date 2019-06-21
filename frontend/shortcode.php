@@ -54,7 +54,7 @@ function html($url, $limit, $columns, $dimension)
     foreach (array_chunk($images, ceil($limit / $columns)) as $col) {
         $value .= '<div class="col">';
         foreach ($col as $image) {
-            $value .= '<a href="' . $url . '" target="_blank"><img src="https://lh3.google.com/u/5/d/' . $image . '=' . $dimension . '" alt="_blank"></a>';
+            $value .= '<a href="' . $url . '" target="_blank"><img src="https://drive.google.com/thumbnail?id=' . $image . '&sz=' . $dimension . '" alt=""></a>';
         }
         $value .= '</div>';
     }

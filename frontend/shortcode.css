@@ -1,6 +1,5 @@
 .dgdg-gallery-container {
     display: flex;
-    margin: 10px;
 }
 .dgdg-gallery-container .col {
     flex: 1;
