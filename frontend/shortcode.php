@@ -24,16 +24,24 @@ function render($atts = [])
     $limit = 6;
     $columns = 3;
     $dimension = 'h187';
+    $images = '';
     extract($atts);
 
-    return html($path, $limit, $columns, $dimension);
+    if ($images) {
+        $images = explode(',', $images);
+        $limit = count($images);
+    } else {
+        $images = false;
+    }
+
+    return html($path, $limit, $columns, $dimension, $images);
 }
 
-function html($url, $limit, $columns, $dimension)
+function html($url, $limit, $columns, $dimension, $selected_images)
 {
     wp_enqueue_style('dgdg_gallery_css');
 
-    $nonce = hash('sha256', $url . $limit . $columns);
+    $nonce = hash('sha256', $url . $limit . $columns . serialize($selected_images));
 
     if (strstr($url, 'photos.app.goo.gl') !== false || strstr($url, 'photos.google.com') !== false) {
         $drive = false;
@@ -60,6 +68,9 @@ function html($url, $limit, $columns, $dimension)
         }
     } else {
         foreach ($value[0] as $image) {
+            if (is_array($selected_images) && !in_array($image[2], $selected_images)) {
+                continue;
+            }
             $images[] = '<img src="https://drive.google.com/thumbnail?id=' . $image[0] . '&sz=' . $dimension . '" alt="">';
             $c++;
             if ($c == $limit) {
