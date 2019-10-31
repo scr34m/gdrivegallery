@@ -1,11 +1,28 @@
 .dgdg-gallery-container {
     display: flex;
+    flex-wrap: wrap;
+    max-width: 800px;
+    width: 100%;
+    justify-content: space-between;
 }
-.dgdg-gallery-container .col {
-    flex: 1;
-    line-height: 0;
-    margin: 0 10px;
+.dgdg-gallery-container .item {
+    display: flex;
+    width: 33.33%;
+    padding: 0 10px 10px 0;
+    box-sizing: border-box;
 }
-.dgdg-gallery-container img {
-    margin: 10px;
+.dgdg-gallery-container .item a {
+    display: block;
+    width: 100%;
+    padding-top: 70%;
+    position: relative;
+    overflow: hidden;
+}
+.dgdg-gallery-container .item img {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    height: auto;
 }

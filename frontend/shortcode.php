@@ -22,7 +22,6 @@ function render($atts = [])
 {
     $path = '';
     $limit = 6;
-    $columns = 3;
     $dimension = 'h187';
     $images = '';
     extract($atts);
@@ -34,14 +33,14 @@ function render($atts = [])
         $images = false;
     }
 
-    return html($path, $limit, $columns, $dimension, $images);
+    return html($path, $limit, $dimension, $images);
 }
 
-function html($url, $limit, $columns, $dimension, $selected_images)
+function html($url, $limit, $dimension, $selected_images)
 {
     wp_enqueue_style('dgdg_gallery_css');
 
-    $nonce = hash('sha256', $url . $limit . $columns . serialize($selected_images));
+    $nonce = hash('sha256', $url . $limit . serialize($selected_images));
 
     if (strstr($url, 'photos.app.goo.gl') !== false || strstr($url, 'photos.google.com') !== false) {
         $drive = false;
@@ -80,12 +79,8 @@ function html($url, $limit, $columns, $dimension, $selected_images)
     }
 
     $value = '';
-    foreach (array_chunk($images, ceil($limit / $columns)) as $col) {
-        $value .= '<div class="col">';
-        foreach ($col as $image) {
-            $value .= '<a href="' . $url . '" target="_blank">' . $image . '</a>';
-        }
-        $value .= '</div>';
+    foreach ($images as $image) {
+        $value .= '<div class="item"><a href="' . $url . '" target="_blank">' . $image . '</a></div>';
     }
 
     return '<div class="dgdg-gallery-container" data-dgdg-nonce="' . $nonce . '">' . $value . '</div>';
