@@ -67,6 +67,9 @@ function html($url, $limit, $dimension, $selected_images)
         }
     } else {
         foreach ($value[0] as $image) {
+            if ($image[3] == 'application/vnd.google-apps.folder') {
+                continue;
+            }
             if (is_array($selected_images) && !in_array($image[2], $selected_images)) {
                 continue;
             }
